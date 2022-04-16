@@ -135,7 +135,7 @@ if __name__ == "__main__":
     parser.add_argument("--gpu", default='0', type=str)
     parser.add_argument('--qf_lr', default=3e-4, type=float)
     parser.add_argument('--policy_lr', default=1e-4, type=float)
-    parser.add_argument('--mmd_sigma', default=50, type=float)
+    parser.add_argument('--mmd_sigma', default=20, type=float)
     parser.add_argument('--kernel_type', default='gaussian', type=str)
     parser.add_argument('--target_mmd_thresh', default=0.05, type=float)
     parser.add_argument('--num_samples', default=100, type=int)
