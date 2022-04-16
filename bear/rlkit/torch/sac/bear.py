@@ -236,15 +236,18 @@ class BEARTrainer(TorchTrainer):
         self.qf2_optimizer.step()
 
         self.policy_optimizer.zero_grad()
-        if self.mode == 'auto':
-            policy_loss.backward(retain_graph=True)
-        self.policy_optimizer.step()
 
         if self.mode == 'auto':
             self.alpha_optimizer.zero_grad()
-            (-policy_loss).backward()
+            (-policy_loss).backward(retain_graph=True)
             self.alpha_optimizer.step()
             self.log_alpha.data.clamp_(min=-5.0, max=10.0)
+
+        if self.mode == 'auto':
+            policy_loss.backward()
+        self.policy_optimizer.step()
+
+
         
         """
         Update networks
