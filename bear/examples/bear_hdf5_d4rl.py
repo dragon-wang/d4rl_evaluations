@@ -1,3 +1,6 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from gym.envs.mujoco import HalfCheetahEnv, HopperEnv, AntEnv, Walker2dEnv
 
 import rlkit.torch.pytorch_util as ptu
@@ -174,7 +177,8 @@ if __name__ == "__main__":
 
         ),
     )
-    rand = np.random.randint(0, 100000)
-    setup_logger(os.path.join('BEAR_launch', str(rand)), variant=variant, base_log_dir='./data')
-    ptu.set_gpu_mode(False)  # optionally set the GPU (default=False)
+    # rand = np.random.randint(0, 100000)
+    # setup_logger(os.path.join('BEAR_launch', str(rand)), variant=variant, base_log_dir='./data')
+    setup_logger(os.path.join('BEAR_launch', args.env, "seed"+str(args.seed)), variant=variant, base_log_dir='./result')
+    ptu.set_gpu_mode(True)  # optionally set the GPU (default=False)
     experiment(variant)
