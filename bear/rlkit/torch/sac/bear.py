@@ -227,14 +227,6 @@ class BEARTrainer(TorchTrainer):
         """
         Update Networks
         """
-        self.qf1_optimizer.zero_grad()
-        qf1_loss.backward()
-        self.qf1_optimizer.step()
-
-        self.qf2_optimizer.zero_grad()
-        qf2_loss.backward()
-        self.qf2_optimizer.step()
-
         self.policy_optimizer.zero_grad()
 
         if self.mode == 'auto':
@@ -247,7 +239,13 @@ class BEARTrainer(TorchTrainer):
             policy_loss.backward()
         self.policy_optimizer.step()
 
+        self.qf1_optimizer.zero_grad()
+        qf1_loss.backward()
+        self.qf1_optimizer.step()
 
+        self.qf2_optimizer.zero_grad()
+        qf2_loss.backward()
+        self.qf2_optimizer.step()
         
         """
         Update networks
