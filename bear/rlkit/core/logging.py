@@ -99,7 +99,7 @@ class Logger(object):
         if file_name not in arr:
             mkdir_p(os.path.dirname(file_name))
             arr.append(file_name)
-            fds[file_name] = open(file_name, mode)
+            fds[file_name] = open(file_name, mode, encoding='utf-8')
 
     def _remove_output(self, file_name, arr, fds):
         if file_name in arr:
